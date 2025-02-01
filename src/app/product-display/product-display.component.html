@@ -1,9 +1,30 @@
 <div class="container">
     <h3 class="text-center">Aviable Products</h3>
+
+    <div class="mt-5 ">
+
+        <input type="text" placeholder="Product name" [(ngModel)]="newProduct.name" >
+        <input type="text" placeholder="price" [(ngModel)]="newProduct.price">
+        <button class="btn btn-primary" (click)="addProduct()">Add product</button>
+
+    </div>
+
     <div class="">
         <!-- try to feed with N numbers of product card by json with a fuction-->
-        <app-product-card/>
-        <app-product-card/>
-        <app-product-card/>
+        <ul class="list-group w-50 mx-auto">
+            
+            @for(product of products; track product){
+
+                <li class="list-group-item text-center">
+                    <p>Product: {{product.name}}, Price: {{product.price}}</p>
+                </li>
+
+            }
+
+
+
+        </ul>
     </div>
+
+    
 </div>
