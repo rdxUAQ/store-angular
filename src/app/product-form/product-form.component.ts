@@ -1,33 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
-import { ProductCardComponent } from "../product-card/product-card.component";
+import { Product } from '../Models/Product';
+import { ProductDisplayComponent } from './product-display/product-display.component';
 
-interface Product{
-  name:string;
-  price: number;
-}
 @Component({
-  selector: 'app-product-display',
+  selector: 'app-product-form',
   standalone: true,
   imports: [
-    ProductCardComponent,
     CommonModule,
-    FormsModule
-  ],
-  templateUrl: './product-display.component.html',
-  styleUrl: './product-display.component.css'
+    FormsModule,
+    ProductDisplayComponent
+],
+  templateUrl: './product-form.component.html',
+  styleUrl: './product-form.component.css'
 })
-export class ProductDisplayComponent {
+export class ProductFormComponent {
 
-  public products:Product[] = [];
+  @ViewChild(ProductDisplayComponent) prodDispComp! : ProductDisplayComponent;  
+
+  
+
+  
   public newProduct: Product ={name:'', price:0};
 
   public addProduct(){
 
     if(this.isValid(this.newProduct)){
 
-      this.products.push({...this.newProduct});
+      this.prodDispComp.addProduct(this.newProduct);
       this.newProduct ={name: "", price: 0}
 
     }else{
@@ -37,7 +38,6 @@ export class ProductDisplayComponent {
     
   }
 
-
   private isValid(product: Product):boolean{
     return (
       product.name.trim() !== '' &&
@@ -45,6 +45,5 @@ export class ProductDisplayComponent {
       product.price > 0
     );
   }
-  
 
 }

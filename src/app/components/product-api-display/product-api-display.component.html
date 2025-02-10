@@ -1,0 +1,14 @@
+<div >
+    <app-product-api-form (setProductApi)="getProduct($event)"></app-product-api-form>
+
+    <ul class="list-group w-50 mx-auto mt-5">
+        <!-- display products found in api -->
+
+        @for (product of products; track product.id) {
+
+            <li class="list-group-item text-center" >
+                <p>{{product.toString()}}</p></li>
+
+        }
+    </ul>
+</div>
